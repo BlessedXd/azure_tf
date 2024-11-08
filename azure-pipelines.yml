@@ -86,7 +86,7 @@ stages:
     pool:
       vmImage: 'ubuntu-latest'
     environment:
-          name: 'Production'  # Replace with your environment name
+      name: 'Production'  # Replace with your environment name
     strategy:
       runOnce:
         deploy:
@@ -106,7 +106,7 @@ stages:
                   inputs:
                     targetType: 'inline'
                     script: |
-                              terraform init  -lock=false
+                              terraform init -lock=false
                               terraform validate
                               terraform plan -out=tfplan.out -lock=false
                   env:
@@ -118,7 +118,7 @@ stages:
                   inputs:
                     targetType: 'inline'
                     script: |
-                      terraform apply  --auto-approve -lock=false tfplan.out
+                      terraform apply --auto-approve -lock=false tfplan.out
                   env:
                     TF_VAR_sql_admin_user: $(TF_VAR_sql_admin_user)
                     TF_VAR_sql_admin_password: $(TF_VAR_sql_admin_password)
